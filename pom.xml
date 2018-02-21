@@ -62,20 +62,33 @@
     </distributionManagement>
 
     <dependencies>
+        <!--Toxiclibs already packaged, we distribute -->
+        <dependency>
+            <groupId>org.clojars.hozumi</groupId>
+            <artifactId>toxiclibscore</artifactId>
+            <version>0022</version>
+        </dependency>
+     
+        
+        <!--Processing core-->
+        <dependency>
+            <groupId>org.processing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.3.6</version>
+        </dependency>
+        
+        <!--Processing OpenGL-->
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl</artifactId>
+            <version>2.3.2</version>
+        </dependency>
         
         <dependency>
-            <groupId>fr.inria</groupId>
-            <artifactId>papart</artifactId>
-            <version>1.2</version>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>2.3.2</version>
         </dependency>
-        <!--Tests no packaging no distribution --> 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
-        </dependency>
-        
     </dependencies>
     
     <reporting>
