@@ -10,6 +10,17 @@
     <description>SimplePointCloud</description>
     <url>https://github.com/Rea-lity-Tech/SimplePointCloud</url>
 
+    <developers>
+        <developer>
+            <name>Jeremy Laviole</name>
+            <url>http://rea.lity.tech</url>
+            <roles>
+                <role>Lead Developper</role>
+            </roles>
+            <email>laviole@rea.lity.tech</email>
+        </developer>
+    </developers>
+    
     <repositories>
         <repository>
             <id>clojars.org</id>
@@ -40,13 +51,6 @@
         </license>
     </licenses>
     
-    <developers>
-        <developer>
-            <name>Jeremy Laviole</name>
-            <email>laviole@rea.lity.tech</email>
-        </developer>
-    </developers>
-    
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,13 +66,11 @@
     </distributionManagement>
 
     <dependencies>
-        <!--Toxiclibs already packaged, we distribute -->
         <dependency>
             <groupId>org.clojars.hozumi</groupId>
             <artifactId>toxiclibscore</artifactId>
             <version>0022</version>
         </dependency>
-     
         
         <!--Processing core-->
         <dependency>
@@ -116,9 +118,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.2</version>
-                <!--                <configuration>
-                    <finalName>scannerPapart</finalName>                   
-                </configuration>-->
             </plugin>  
         
             <plugin>
@@ -131,20 +130,64 @@
                 </configuration>
             </plugin>
             
-<!--            <plugin>
+                <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+                <!--https://maven.apache.org/plugins/maven-javadoc-plugin/examples/tag-configuration.html-->
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <!--                    <tags>
+                        <tag>
+                            <name>webref</name>
+                            todo tag for all places
+                            <placement>a</placement>
+                            <head>link to website: </head>
+                        </tag>
+                        <tag>
+                            <name>nowebref</name>
+                            todo tag for all places
+                            <placement>a</placement>
+                            <head>no link to website:</head>
+                        </tag>
+                    </tags>-->
+                </configuration>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <id>attach-javadocs</id>
                         <goals>
-                            <goal>sign</goal>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            
         </plugins>
         
         <resources>
@@ -159,113 +202,5 @@
             </resource>
         </resources>
     </build>
-    
-  
-    <profiles>
-    
-        <!-- If someone knows a better way to do this, please do let me know! -->
-        <!--From JavaCPP presets-->
-        <profile>
-            <id>linux</id>
-            <activation>
-                <os>
-                    <name>linux</name>
-                </os>
-            </activation>
-            <properties>
-                <os.name>linux</os.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>macosx</id>
-            <activation>
-                <os>
-                    <name>mac os x</name>
-                </os>
-            </activation>
-            <properties>
-                <os.name>macosx</os.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>windows</id>
-            <activation>
-                <os>
-                    <family>windows</family>
-                </os>
-            </activation>
-            <properties>
-                <os.name>windows</os.name>
-            </properties>
-        </profile>
-        <profile>
-            <id>i386</id>
-            <activation>
-                <os>
-                    <arch>i386</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86</os.arch>
-            </properties>
-        </profile>
-        <profile>
-            <id>i486</id>
-            <activation>
-                <os>
-                    <arch>i486</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86</os.arch>
-            </properties>
-        </profile>
-        <profile>
-            <id>i586</id>
-            <activation>
-                <os>
-                    <arch>i586</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86</os.arch>
-            </properties>
-        </profile>
-        <profile>
-            <id>i686</id>
-            <activation>
-                <os>
-                    <arch>i686</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86</os.arch>
-            </properties>
-        </profile>
-        <profile>
-            <id>amd64</id>
-            <activation>
-                <os>
-                    <arch>amd64</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86_64</os.arch>
-            </properties>
-        </profile>
-        <profile>
-            <id>x86-64</id>
-            <activation>
-                <os>
-                    <arch>x86-64</arch>
-                </os>
-            </activation>
-            <properties>
-                <os.arch>x86_64</os.arch>
-            </properties>
-        </profile>
-    </profiles>
-
-
 
 </project>

@@ -1,6 +1,5 @@
 /*
- * Part of the PapARt project - https://project.inria.fr/papart/
- *
+ * Copyright (C) 2017-2019 RealityTech
  * Copyright (C) 2014-2016 Inria
  * Copyright (C) 2011-2013 Bordeaux University
  *

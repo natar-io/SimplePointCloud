@@ -1,6 +1,5 @@
 /*
- * Part of the PapARt project - https://project.inria.fr/papart/
- *
+ * Copyright (C) 2017-2019 RealityTech
  * Copyright (C) 2014-2016 Inria
  * Copyright (C) 2011-2013 Bordeaux University
  *
@@ -29,8 +28,6 @@ import processing.core.PMatrix3D;
 import processing.core.PVector;
 import processing.opengl.PGL;
 import static processing.opengl.PGL.ARRAY_BUFFER;
-import static processing.opengl.PGL.FLOAT;
-import static processing.opengl.PGL.STATIC_DRAW;
 import static processing.opengl.PGL.STREAM_DRAW;
 import processing.opengl.PGraphicsOpenGL;
 import processing.opengl.PShader;
@@ -118,57 +115,6 @@ public class PointCloud {
 
     private int currentVertNo = 0;
 
-//    @Deprecated
-//    public void update(PointCloudElement[] pce, boolean[] mask) {
-//        nbColors = 0;
-//        currentVertNo = 0;
-//
-//        assert (pce.length <= nbPoints);
-//        for (int i = 0; i < pce.length; i++) {
-//            if (mask[i]) {
-//                addPoint(pce[i]);
-//            }
-//        }
-//
-//        loadVerticesToNative();
-//    }
-//
-//    public void update(PointCloudElement[] pce) {
-//        currentVertNo = 0;
-//        nbColors = 0;
-//        assert (pce.length <= nbPoints);
-//
-//        for (int i = 0; i < pce.length; i++) {
-//            // TODO: parallel ?
-//            addPoint(pce[i]);
-//        }
-//        loadVerticesToNative();
-//    }
-//    public void updateCheck(PointCloudElement[] pce, int w, int h) {
-//        nbVertices = 0;
-//        nbColors = 0;
-//
-//        System.out.println("Compute connexity...");
-//        Connexity connexity = new Connexity(pce, w, h);
-//        connexity.computeAll();
-//
-//        System.out.println("Compute connexity OK");
-//        byte[] connexSum = connexity.getSum();
-//
-//        assert (pce.length <= nbPoints);
-//
-//        for (int i = 0; i < pce.length; i++) {
-//            // TODO: parallel ?
-//            if (pce[i] == null
-//                    || pce[i].position == null
-//                    || connexSum[i] < 3) {
-//                continue;
-//            }
-//
-//            addPoint(pce[i]);
-//        }
-//        loadVerticesToNative();
-//    }
     public void addPoint(DepthPoint pce) {
 
         if (pce == null || pce.position == null) {
@@ -216,7 +162,6 @@ public class PointCloud {
         // load the buffer 
         pgl.bindBuffer(GL2.GL_ARRAY_BUFFER, vertexBuffer);
         // set the data 
-        // TODO: not sure about the size... 
         verticesNative.position(0); // start at 0
         pgl.bufferData(ARRAY_BUFFER, nbPoints * 4 * SIZEOF_FLOAT, verticesNative, STREAM_DRAW);
         pgl.vertexAttribPointer(vertLoc, 4, PGL.FLOAT, false, 4 * SIZEOF_FLOAT, 0);
@@ -224,9 +169,6 @@ public class PointCloud {
         // enable the vertice array
         pgl.enableVertexAttribArray(vertLoc);
         
-        
-
-
         // Making sure that no VBO is bound at this point.
         pgl.bindBuffer(GL2.GL_ARRAY_BUFFER, colorBuffer);
         colorsNative.position(0); // start at 0
