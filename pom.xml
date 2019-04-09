@@ -51,6 +51,11 @@
         </license>
     </licenses>
     
+        <scm>
+        <url>https://github.com/Rea-lity-Tech/SimplePointCloud</url>
+        <connection>scm:git:git@github.com:Rea-lity-Tech/SimplePointCloud.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:Rea-lity-Tech/SimplePointCloud.git</developerConnection>
+    </scm>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
