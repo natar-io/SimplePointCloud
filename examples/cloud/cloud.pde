@@ -6,7 +6,7 @@ import peasy.*;
 PeasyCam cam;
 PointCloud pointCloud;
 
-int nbPoints = 50000;
+int nbPoints = 500;
 
 void settings() {
     size(640, 480, P3D);
@@ -22,13 +22,12 @@ void setup() {
 }
 
 void loadCloud(){
-    // colorMode(HSB, nbPoints, 100, 100);
     int c = color(250);
 
     for(int i = 0; i < nbPoints; i++){
-	float x = cos(i * millis() / 4000f);
-	float y = cos(i * millis() / 6200f);
-	float z = cos(i * millis() / 5200f);
+	float x = cos(i * millis() / 40000f);
+	float y = cos(i * millis() / 62000f);
+	float z = cos(i * millis() / 52000f);
 
 	DepthPoint p = new DepthPoint(x * 100,
 				      y * 100,
@@ -39,16 +38,10 @@ void loadCloud(){
     colorMode(RGB, 255);
 }
 
-
-
-boolean first = true;
-
 void draw() {
-    background(40);
-  loadCloud();
-  pointCloud.drawSelf((PGraphicsOpenGL) g);
+    loadCloud();
+    pointCloud.drawSelf((PGraphicsOpenGL) g);
 }
-
 
 void keyPressed(){
     background(40);
