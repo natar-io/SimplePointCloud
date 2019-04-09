@@ -141,6 +141,9 @@ public class PointCloud {
 
         colorsNative.rewind();
         colorsNative.put(colorsJava, 0, nbColors);
+        
+        currentVertNo = 0;
+        nbColors = 0;
     }
 
     public void drawSelf(PGraphicsOpenGL g) {
